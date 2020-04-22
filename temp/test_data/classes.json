@@ -1,0 +1,11 @@
+[
+    {
+        "name": "weapon",
+        "example": "A silver and ashwood sword. The blade is properly polished silver. The pommel is faintly burned ashwood adorned with a ruby.",
+        "outline": "<List Component Names with single Property identifiers> <Describe Component using all Properties> <Describe 2nd Comp using all Props>",
+        "format": "{{.Intro}} {{.Component}} {{.Component}}",
+        "ideal": "{{.Intro}} {{.ComponentLoop}}",
+        "template": "{{.Intro}} {{range .Components}}",
+        "omg": "each component IS a sentence and vice-versa"
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "name": "engraving",
+        "common": [
+            "etchings",
+            "carvings"
+        ],
+        "uncommon": [
+            "engravings",
+            "inscriptions"
+        ],
+        "rare": [
+            "runes",
+            "ciphers"
+        ],
+        "prefix_names": [
+            "language"
+        ]
+    },
+    {
+        "name": "language",
+        "common": [
+            "dwarvish",
+            "gnomish"
+        ],
+        "uncommon": [
+            "elvish",
+            "infernal"
+        ],
+        "rare": [
+            "celestial",
+            "draconic"
+        ]
+    }
+] 

@@ -1,0 +1,109 @@
+[
+    {
+        "name": "organic",
+        "common": [
+            "scratched",
+            "scarred"
+        ],
+        "uncommon": [
+            "water damaged",
+            "singed"
+        ],
+        "rare": [
+            "charred",
+            "rotted"
+        ],
+        "prefix_names": [
+            "adverb_severity"
+        ]
+    },
+    {
+        "name": "metallic",
+        "common": [
+            "scratched",
+            "dented"
+        ],
+        "uncommon": [
+            "rusted",
+            "oxidized"
+        ],
+        "rare": [
+            "corroded",
+            "melted"
+        ],
+        "prefix_names": [
+            "adverb_severity"
+        ]
+    },
+    { 
+        "name": "ceramic",
+        "common": [
+            "fractured",
+            "chipped"
+        ],
+        "uncommon": [
+            "pitted",
+            "cracked"
+        ],
+        "rare": [
+            "corroded",
+            "broken"
+        ],
+        "prefix_names": [
+            "adverb_severity"
+        ]
+    },
+    {
+        "name": "composite",
+        "common": [
+            "scoured"
+        ],
+        "uncommon": [
+            "eroded",
+            "abraded"
+        ],
+        "rare": [
+            "deteriorated",
+            "crumbling"
+        ],
+        "prefix_names": [
+            "adverb_severity"
+        ]
+    },
+    {
+        "name": "polish",
+        "common": [
+            "polished",
+            "buffed"
+        ],
+        "uncommon": [
+            "burnished",
+            "glossed"
+        ],
+        "rare": [
+            "shined",
+            "lustered"
+        ],
+        "prefix_names": [
+            "adverb_performance"
+        ]
+    },
+    {
+        "name": "varnish",
+        "common": [
+            "waxed",
+            "oiled"
+        ],
+        "uncommon": [
+            "glossed",
+            "glazed"
+        ],
+        "rare": [
+            "varnished",
+            "lacquered"
+        ],
+        "prefix_names": [
+            "adverb_performance"
+        ]
+    }
+]

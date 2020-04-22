@@ -1,0 +1,32 @@
+[
+    {
+        "name": "adverb_severity",
+        "common": [
+            "faintly",
+            "mildly"
+        ], 
+        "uncommon": [
+            "moderately",
+            "fairly"
+        ],
+        "rare": [
+            "severely",
+            "extremely"
+        ]
+    },
+    {
+        "name": "adverb_performance",
+        "common": [
+            "carelessly",
+            "sloppily"
+        ],
+        "uncommon": [
+            "properly",
+            "well"
+        ],
+        "rare": [
+            "flawlessly",
+            "meticulously"
+        ]
+    }
+] 

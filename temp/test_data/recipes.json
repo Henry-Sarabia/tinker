@@ -1,0 +1,52 @@
+[
+    {
+        "name": "sword",
+        "components": [
+            {
+                "name": "blade",
+                "frequency": 1.0,
+                "properties": [
+                    {
+                        "name": "material",
+                        "frequency": 1.0,
+                        "attribute_names": [
+                            "wood",
+                            "base metal",
+                            "precious metal"
+                        ]
+                    },
+                    {
+                        "name": "decoration",
+                        "frequency": 0.02,
+                        "attribute_names": [
+                            "engraving"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "pommel",
+                "frequency": 1.0,
+                "properties": [
+                    {
+                        "name": "material",
+                        "frequency": 1.0,
+                        "attribute_names": [
+                            "wood",
+                            "bone",
+                            "base metal",
+                            "precious metal"
+                        ]
+                    },
+                    {
+                        "name": "decoration",
+                        "frequency": 0.2,
+                        "attribute_names": [
+                            "gem"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

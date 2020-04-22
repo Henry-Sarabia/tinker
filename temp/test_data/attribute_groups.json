@@ -1,0 +1,9 @@
+[
+    {
+        "name": "metals",
+        "attribute_names": [
+            "base metal",
+            "precious metal"
+        ]
+    }
+]

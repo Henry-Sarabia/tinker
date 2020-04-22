@@ -1,0 +1,116 @@
+[
+    {
+        "name": "wood",
+        "common": [
+            "oak wood",
+            "cherry wood"
+        ],
+        "uncommon": [
+            "firwood",
+            "sandalwood"
+        ],
+        "rare": [
+            "ironwood",
+            "rosewood"
+        ],
+        "prefix_names": [
+            "organic",
+            "varnish"
+        ]
+    },
+    {
+        "name": "base metal",
+        "common": [
+            "iron",
+            "lead"
+        ],
+        "uncommon": [
+            "copper",
+            "brass"
+        ],
+        "rare": [
+            "bronze",
+            "steel"
+        ],
+        "prefix_names": [
+            "metallic",
+            "polish"
+        ]
+    },
+    { 
+        "name": "precious metal",
+        "common": [
+            "copper",
+            "silver"
+        ],
+        "uncommon": [
+            "rose gold",
+            "white gold"
+        ],
+        "rare": [
+            "platinum"
+        ],
+        "prefix_names": [
+            "metallic",
+            "polish"
+        ]
+    },
+    {
+        "name": "stone",
+        "common": [
+            "basalt",
+            "diorite"
+        ],
+        "uncommon": [
+            "sandstone",
+            "limestone"
+        ],
+        "rare": [
+            "marble",
+            "onyx"
+        ],
+        "prefix_names": [
+            "composite",
+            "polish"
+        ]
+    },
+    {
+        "name": "bone",
+        "common": [
+            "human bone",
+            "animal bone"
+        ],
+        "uncommon": [
+            "unidentified bone",
+            "monster bone"
+        ],
+        "rare": [
+            "dragonbone"
+        ],
+        "prefix_names": [
+            "organic",
+            "polish",
+            "ceramic"
+        ]
+    },
+    {
+        "name": "gem",
+        "common": [
+            "bloodstone",
+            "moonstone"
+        ],
+        "uncommon": [
+            "jade",
+            "pearl"
+        ],
+        "rare": [
+            "ruby",
+            "sapphire"
+        ],
+        "prefix_names": [
+            "ceramic",
+            "composite",
+            "polish"
+        ]
+    }
+]
