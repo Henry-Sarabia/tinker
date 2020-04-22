@@ -76,7 +76,7 @@ func (g *Generator) item(recipe ItemRecipe) Item {
 	s := &strings.Builder{}
 	i := Item{
 		Name:       recipe.Name,
-		Descriptor: comps[0].Property().Attribute,
+		Descriptor: comps[rand.Intn(len(comps))].Property().Attribute,
 		Components: comps,
 	}
 
