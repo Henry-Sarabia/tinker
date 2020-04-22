@@ -76,7 +76,7 @@ func (g *Generator) item(recipe ItemRecipe) Item {
 	s := &strings.Builder{}
 	i := Item{
 		Name:       recipe.Name,
-		Descriptor: comps[rand.Intn(len(comps))].Property().Attribute,
+		Descriptor: comps[rand.Intn(len(comps))].RandProperty().Attribute,
 		Components: comps,
 	}
 
@@ -89,3 +89,5 @@ func (g *Generator) item(recipe ItemRecipe) Item {
 func (g *Generator) Item() Item {
 	return g.item(g.recipe())
 }
+
+// if multiple properties are needed, they should all be listed not just 1 like it is right now

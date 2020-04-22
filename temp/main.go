@@ -9,7 +9,7 @@ import (
 func main() {
 	t := tinker.New()
 	i := t.Item()
-	fmt.Println("TEXT: ", i.Text)
+	fmt.Println(i.Text)
 	// fmt.Println("ITEM")
 	// fmt.Println(i)
 }

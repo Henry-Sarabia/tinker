@@ -1,2 +1,4 @@
-A {{.Descriptor.Name}} {{.Name}}.
-{{range .Components -}} The {{.Name}} is {{.Property.Attribute.Name}}. {{- end}}
+You find a {{.Descriptor.Name}} {{.Name}}.
+{{range .Components -}}
+The {{.Name}} is {{.RandProperty.Attribute.Description}}.
+{{end}}

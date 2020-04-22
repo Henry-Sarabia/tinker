@@ -2,6 +2,7 @@ package tinker
 
 import (
 	"log"
+	"math/rand"
 	"strings"
 	"text/template"
 )
@@ -15,16 +16,10 @@ type Component struct {
 	// Property Property
 }
 
-// Property returns the first of a Component's Properties.
-func (c *Component) Property() Property {
-	return c.Properties[0]
+// RandProperty returns a randomly selected RandProperty from the Component's Properties.
+func (c *Component) RandProperty() Property {
+	return c.Properties[rand.Intn(len(c.Properties))]
 }
-
-// // Description generates the Component's description.
-// func (c *Component) Description() string {
-// 	// The {blade/name} is {silver/property} and {foo/property} and...
-
-// }
 
 // compToSentence generates a sentence for the provided Component.
 func compToSentence(comp Component) string {
