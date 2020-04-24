@@ -1,0 +1,24 @@
+[
+    {
+        "name": "made of",
+        "variants": [
+            "made of",
+            "made out of",
+            "made from",
+            "crafted out of",
+            "crafted from",
+            "built out of",
+            "built from",
+            "fashioned out of"
+        ]
+    },
+    {
+        "name": "decorated with",
+        "variants":[
+            "decorated with",
+            "adorned with",
+            "embellished with",
+            "ornamented with"
+        ]
+    }
+]

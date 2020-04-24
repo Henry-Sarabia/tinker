@@ -12,6 +12,8 @@ const (
 	chanceCommon   float64 = 0.75
 	chanceUncommon float64 = 0.20
 	chanceRare     float64 = 0.5
+
+	chancePrefixChain float64 = 0.5
 )
 
 // AttributeRecipe describes a physical attribute.
@@ -42,7 +44,7 @@ func (a AttributeRecipe) resolve(bank map[string]AttributeRecipe) string {
 		s = randomString(a.Rare)
 	}
 
-	if len(a.PrefixNames) > 0 && rand.Float64() > 0.5 {
+	if len(a.PrefixNames) > 0 && rand.Float64() > chancePrefixChain {
 		n := randomString(a.PrefixNames)
 		s = bank[n].resolve(bank) + " " + s
 	}

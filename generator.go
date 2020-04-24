@@ -15,12 +15,14 @@ const (
 	fileMaterials    string = "test_data/materials.json"
 	fileQualities    string = "test_data/qualities.json"
 	fileRecipes      string = "test_data/recipes.json"
+	fileVerbs        string = "test_data/verbs.json"
 )
 
 // Generator builds items.
 type Generator struct {
 	Items      []ItemRecipe
 	Attributes map[string]AttributeRecipe
+	Verbs      map[string]Verb
 }
 
 // New returns a properly configured Generator.
@@ -28,9 +30,11 @@ func New() *Generator {
 
 	items := readItemRecipes(fileRecipes)
 	atbs := loadAttributeRecipes(fileAdverbs, fileDecorations, fileMaterials, fileQualities)
+	verbs := loadVerbs(fileVerbs)
 	g := &Generator{
 		Items:      items,
 		Attributes: atbs,
+		Verbs:      verbs,
 	}
 
 	return g
@@ -56,7 +60,7 @@ func (g *Generator) components(recipes []ComponentRecipe) []Component {
 func (g *Generator) component(recipe ComponentRecipe) Component {
 	props := []Property{}
 	for _, p := range recipe.PropertyRecipes() {
-		props = append(props, p.property(g.Attributes))
+		props = append(props, p.property(g.Attributes, g.Verbs))
 	}
 
 	return Component{
@@ -76,7 +80,7 @@ func (g *Generator) item(recipe ItemRecipe) Item {
 	s := &strings.Builder{}
 	i := Item{
 		Name:       recipe.Name,
-		Descriptor: comps[rand.Intn(len(comps))].RandProperty().Attribute,
+		Descriptor: comps[0].RandProperty().Attribute,
 		Components: comps,
 	}
 

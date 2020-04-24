@@ -13,6 +13,9 @@
                             "wood",
                             "base metal",
                             "precious metal"
+                        ],
+                        "verb_names": [
+                            "made of"
                         ]
                     },
                     {
@@ -20,6 +23,9 @@
                         "frequency": 0.02,
                         "attribute_names": [
                             "engraving"
+                        ],
+                        "verb_names": [
+                            "decorated with"
                         ]
                     }
                 ]
@@ -36,15 +42,42 @@
                             "bone",
                             "base metal",
                             "precious metal"
+                        ],
+                        "verb_names": [
+                            "made of"
                         ]
                     },
                     {
                         "name": "decoration",
-                        "frequency": 0.2,
+                        "frequency": 0.5,
                         "attribute_names": [
                             "gem"
+                        ],
+                        "verb_names": [
+                            "decorated with"
                         ]
                     }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "figurine",
+        "components": [
+            {
+                "name": "shape",
+                "frequency": 1.0,
+                "properties": [
+                    {
+                        "name": ""
+                    }
+                ]
+            },
+            {
+                "name": "material",
+                "frequency": 1.0,
+                "properties": [
+
                 ]
             }
         ]

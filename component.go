@@ -13,12 +13,16 @@ const templateFile string = "test_data/item.tmpl"
 type Component struct {
 	Name       string
 	Properties []Property //[material]slightly burned ashwood; might also need to be a slice for ordering
-	// Property Property
 }
 
 // RandProperty returns a randomly selected RandProperty from the Component's Properties.
 func (c *Component) RandProperty() Property {
 	return c.Properties[rand.Intn(len(c.Properties))]
+}
+
+// FirstProperty returns the Component's first Property.
+func (c *Component) FirstProperty() Property {
+	return c.Properties[0]
 }
 
 // compToSentence generates a sentence for the provided Component.
@@ -35,4 +39,5 @@ func compToSentence(comp Component) string {
 	}
 
 	return b.String()
+
 }

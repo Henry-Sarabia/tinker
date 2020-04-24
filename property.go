@@ -4,6 +4,7 @@ package tinker
 type Property struct {
 	Name      string
 	Attribute Attribute
+	Verb      string
 }
 
 // dont try to return strings, try to return a well-composed struct
@@ -13,17 +14,15 @@ type PropertyRecipe struct {
 	Name           string   `json:"name"`
 	Frequency      float64  `json:"frequency"`
 	AttributeNames []string `json:"attribute_names"`
+	VerbNames      []string `json:"verb_names"`
 }
 
-func (p *PropertyRecipe) roll(bank map[string]AttributeRecipe) string {
-	n := randomString(p.AttributeNames)
-	return bank[n].resolve(bank)
-}
-
-func (p *PropertyRecipe) property(bank map[string]AttributeRecipe) Property {
-	n := randomString(p.AttributeNames)
+func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) Property {
+	a := randomString(p.AttributeNames)
+	v := randomString(p.VerbNames)
 	return Property{
 		Name:      p.Name,
-		Attribute: bank[n].attribute(bank),
+		Attribute: atbs[a].attribute(atbs),
+		Verb:      verbs[v].RandVariant(),
 	}
 }
