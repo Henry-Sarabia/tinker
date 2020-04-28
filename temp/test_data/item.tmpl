@@ -1,7 +1,16 @@
 You find a {{.Descriptor.Name}} {{.Name}}.
+{{if .IsMultiComponent}}
 {{range .Components}}
 It has a {{.Name}} {{.FirstProperty.Verb}} {{.FirstProperty.Attribute.Description}}
 {{- if gt (len .Properties) 1 -}}
 {{- range (slice .Properties 1)}} and {{.Verb}} {{.Attribute.Description -}}{{- end -}}
 {{end}}.
+{{end}}
+{{else}}
+{{range .Components}}
+It is {{.FirstProperty.Verb}} {{.FirstProperty.Attribute.Description}}
+{{- if gt (len .Properties) 1 -}}
+{{- range (slice .Properties 1)}} and {{.Verb}} {{.Attribute.Description -}}{{- end -}}
+{{end}}.
+{{end}}
 {{end}}
