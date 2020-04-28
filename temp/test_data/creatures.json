@@ -1,0 +1,69 @@
+[
+    {
+        "name": "humanoid",
+        "common": [
+            "dragonborn",
+            "dwarf",
+            "elf",
+            "gnome",
+            "halfling",
+            "half-orc",
+            "human",
+            "tiefling"
+        ],
+        "uncommon": [
+            "goblin",
+            "hobgoblin",
+            "kenku",
+            "kobold",
+            "orc",
+            "tabaxi",
+            "yuan-ti"
+        ],
+        "rare": [
+            "aarakocra",
+            "firbolg",
+            "goliath",
+            "lizardfolk",
+            "minotaur",
+            "tortle",
+            "triton",
+            "warforged"
+        ]
+    },
+    {
+        "name": "monstrosity",
+        "common": [
+            "death dog",
+            "cockatrice",
+            "harpy",
+            "owlbear",
+            "roc",
+            "worg"
+        ],
+        "uncommon": [
+            "bulette",
+            "centaur",
+            "chimera",
+            "drider",
+            "ettercap",
+            "hippogriff",
+            "hydra",
+            "manticore",
+            "merrow",
+            "minotaur",
+            "naga",
+            "phase spider",
+            "rust monster"
+        ],
+        "rare": [
+            "androsphinx",
+            "basilisk",
+            "gorgon",
+            "griffon",
+            "gynosphinx",
+            "kraken",
+            "medusa"
+        ]
+    }
+]

@@ -20,5 +20,24 @@
             "embellished with",
             "ornamented with"
         ]
+    },
+    {
+        "name": "shaped like",
+        "variants": [
+            "shaped like",
+            "shaped to look like",
+            "shaped to resemble",
+            "shaped in the form of",
+            "shaped in the likeness of",
+            "made to look like",
+            "made to resemble",
+            "made in the likeness of",
+            "fashioned to look like",
+            "fashioned to resemble",
+            "built to look like",
+            "built to resemble",
+            "designed to look like",
+            "designed to resemble"
+        ]
     }
 ]

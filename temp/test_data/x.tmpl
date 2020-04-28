@@ -1,4 +1,6 @@
-You find a {{.Descriptor.Name}} {{.Name}}.
-{{range .Components -}}
-The {{.Name}} is {{.RandProperty.Attribute.Description}}.
+{{range .Components}}
+It has a {{.Name}} {{.FirstProperty.Verb}} {{.FirstProperty.Attribute.Description}}
+{{- if gt (len .Properties) 1 -}}
+{{- range (slice .Properties 1)}} and {{.Verb}} {{.Attribute.Description -}}{{- end -}}
+{{end}}.
 {{end}}

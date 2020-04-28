@@ -65,19 +65,34 @@
         "name": "figurine",
         "components": [
             {
-                "name": "shape",
+                "name": "figurine",
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": ""
+                        "name": "shape",
+                        "frequency": 1.0,
+                        "attribute_names": [
+                            "humanoid",
+                            "monstrosity"
+                        ],
+                        "verb_names": [
+                            "shaped like"
+                        ]
+                    },
+                    {
+                        "name": "material",
+                        "frequency": 1.0,
+                        "attribute_names": [
+                            "base metal",
+                            "precious metal",
+                            "wood",
+                            "bone",
+                            "gem"
+                        ],
+                        "verb_names":[
+                            "made of"
+                        ]
                     }
-                ]
-            },
-            {
-                "name": "material",
-                "frequency": 1.0,
-                "properties": [
-
                 ]
             }
         ]

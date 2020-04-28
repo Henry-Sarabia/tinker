@@ -16,6 +16,7 @@ const (
 	fileQualities    string = "test_data/qualities.json"
 	fileRecipes      string = "test_data/recipes.json"
 	fileVerbs        string = "test_data/verbs.json"
+	fileCreatures    string = "test_data/creatures.json"
 )
 
 // Generator builds items.
@@ -29,7 +30,7 @@ type Generator struct {
 func New() *Generator {
 
 	items := readItemRecipes(fileRecipes)
-	atbs := loadAttributeRecipes(fileAdverbs, fileDecorations, fileMaterials, fileQualities)
+	atbs := loadAttributeRecipes(fileAdverbs, fileDecorations, fileMaterials, fileQualities, fileCreatures)
 	verbs := loadVerbs(fileVerbs)
 	g := &Generator{
 		Items:      items,
@@ -93,5 +94,3 @@ func (g *Generator) item(recipe ItemRecipe) Item {
 func (g *Generator) Item() Item {
 	return g.item(g.recipe())
 }
-
-// if multiple properties are needed, they should all be listed not just 1 like it is right now
