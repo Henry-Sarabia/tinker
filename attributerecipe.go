@@ -34,15 +34,15 @@ func (a AttributeRecipe) description(bank map[string]AttributeRecipe) string {
 
 	switch {
 	case pb < pbCommon:
-		d = randomString(a.Common)
+		d = randString(a.Common)
 	case pb < pbUncommon+pbCommon:
-		d = randomString(a.Uncommon)
+		d = randString(a.Uncommon)
 	case pb < pbRare+pbUncommon+pbCommon:
-		d = randomString(a.Rare)
+		d = randString(a.Rare)
 	}
 
 	if len(a.PrefixNames) > 0 && rand.Float64() > pbChainPrefix {
-		n := randomString(a.PrefixNames)
+		n := randString(a.PrefixNames)
 		d = bank[n].description(bank) + " " + d
 	}
 

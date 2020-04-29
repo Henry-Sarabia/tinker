@@ -16,8 +16,8 @@ type PropertyRecipe struct {
 }
 
 func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) Property {
-	a := randomString(p.AttributeNames)
-	v := randomString(p.VerbNames)
+	a := randString(p.AttributeNames)
+	v := randString(p.VerbNames)
 	return Property{
 		Name:      p.Name,
 		Attribute: atbs[a].attribute(atbs),
