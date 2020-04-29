@@ -1,22 +1,13 @@
 You find a {{.Descriptor.Name}} {{.Name}}.
-{{- if .IsMultiComponent}}
-{{- template "multicomponent" .}}
-{{- else}}
-{{- template "singlecomponent" .FirstComponent}}
+{{- range .Components -}}
+{{template "component" .}}
 {{- end -}}
 
-{{define "multicomponent"}}
-{{- range .Components}}
-The {{.Name}} is {{.FirstProperty.Verb}} {{"{{"}}.Article{{"}}"}} {{.FirstProperty.Attribute.Description}}
-{{- if .IsMultiProperty}}
-{{- range (slice .Properties 1)}} and {{.Verb}} {{.Attribute.Description}}{{end}}
-{{- end}}.
-{{- end}}
+{{define "component"}}
+The {{.Name}} is {{template "property" (index .Properties 0)}}
+{{- if gt (len .Properties) 1}}{{range (slice .Properties 1)}} and {{template "property" .}}{{end}}{{end -}}.
 {{- end -}}
 
-{{define "singlecomponent"}}
-The {{.Name}} is {{.FirstProperty.Verb}} {{"{{"}}.Article{{"}}"}} {{.FirstProperty.Attribute.Description}}
-{{- if .IsMultiProperty}}
-{{- range (slice .Properties 1)}} and {{.Verb}} {{.Attribute.Description}}{{end}}
-{{- end}}.
+{{define "property"}}
+{{- .Verb}} {{"{{"}}.Article{{"}}"}} {{.Attribute.Description -}}
 {{- end -}}
