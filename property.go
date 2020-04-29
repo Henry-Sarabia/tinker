@@ -1,6 +1,6 @@
 package tinker
 
-// Property describes a specific physical property.
+// Property describes a specific physical property such as material or shape.
 type Property struct {
 	Name      string
 	Attribute Attribute
@@ -9,7 +9,7 @@ type Property struct {
 
 // dont try to return strings, try to return a well-composed struct
 
-// PropertyRecipe describes a physical property.
+// PropertyRecipe describes a physical property such as material or shape.
 type PropertyRecipe struct {
 	Name           string   `json:"name"`
 	Frequency      float64  `json:"frequency"`

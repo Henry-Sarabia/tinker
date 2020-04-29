@@ -16,3 +16,8 @@ func (i Item) IsMultiComponent() bool {
 
 	return false
 }
+
+// FirstComponent returns the item's first Component.
+func (i Item) FirstComponent() Component {
+	return i.Components[0]
+}

@@ -16,13 +16,22 @@ type Component struct {
 }
 
 // RandProperty returns a randomly selected RandProperty from the Component's Properties.
-func (c *Component) RandProperty() Property {
+func (c Component) RandProperty() Property {
 	return c.Properties[rand.Intn(len(c.Properties))]
 }
 
 // FirstProperty returns the Component's first Property.
-func (c *Component) FirstProperty() Property {
+func (c Component) FirstProperty() Property {
 	return c.Properties[0]
+}
+
+// IsMultiProperty returns true if the Component has multiple Properties.
+func (c Component) IsMultiProperty() bool {
+	if len(c.Properties) > 1 {
+		return true
+	}
+
+	return false
 }
 
 // compToSentence generates a sentence for the provided Component.
