@@ -8,18 +8,17 @@ import (
 )
 
 const (
-	fileAdverbs      string = "test_data/adverbs.json"
-	fileGroups       string = "test_data/attribute_groups.json"
-	fileDecorations  string = "test_data/decorations.json"
 	fileItemTemplate string = "test_data/item.tmpl"
+	fileItems        string = "test_data/items.json"
+	fileAdverbs      string = "test_data/adverbs.json"
+	fileCreatures    string = "test_data/creatures.json"
+	fileDecorations  string = "test_data/decorations.json"
 	fileMaterials    string = "test_data/materials.json"
 	fileQualities    string = "test_data/qualities.json"
-	fileRecipes      string = "test_data/recipes.json"
 	fileVerbs        string = "test_data/verbs.json"
-	fileCreatures    string = "test_data/creatures.json"
 )
 
-// Generator builds items.
+// Generator generates items using the provided recipes.
 type Generator struct {
 	Items      []ItemRecipe
 	Attributes map[string]AttributeRecipe
@@ -28,9 +27,8 @@ type Generator struct {
 
 // New returns a properly configured Generator.
 func New() *Generator {
-
-	items := readItemRecipes(fileRecipes)
-	atbs := loadAttributeRecipes(fileAdverbs, fileDecorations, fileMaterials, fileQualities, fileCreatures)
+	items := readItemRecipes(fileItems)
+	atbs := loadAttributeRecipes(fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities)
 	verbs := loadVerbs(fileVerbs)
 	g := &Generator{
 		Items:      items,
@@ -41,15 +39,36 @@ func New() *Generator {
 	return g
 }
 
-// recipe returns a random recipe from the Generator's Items.
-func (g *Generator) recipe() ItemRecipe {
-	return g.Items[rand.Intn(len(g.Items))]
+// Item generates a random item corresponding to one of the loaded ItemRecipes.
+func (g *Generator) Item() Item {
+	i := rand.Intn(len(g.Items))
+	return g.item(g.Items[i])
 }
 
-// components builds a slice of Components according to the provided ComponentRecipes.
-func (g *Generator) components(recipes []ComponentRecipe) []Component {
+// item generates an item according to the provided ItemRecipe.
+func (g *Generator) item(rcp ItemRecipe) Item {
+	comps := g.components(rcp.ComponentRecipes())
+	t, err := template.ParseFiles(fileItemTemplate)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	it := Item{
+		Name:       rcp.Name,
+		Prelude:    comps[0].RandProperty().Attribute,
+		Components: comps,
+	}
+
+	wr := &strings.Builder{}
+	t.Execute(wr, it)
+	it.Description = wr.String()
+	return it
+}
+
+// components generates a slice of Components according to the provided ComponentRecipes.
+func (g *Generator) components(rcps []ComponentRecipe) []Component {
 	comps := []Component{}
-	for _, r := range recipes {
+	for _, r := range rcps {
 		comp := g.component(r)
 		comps = append(comps, comp)
 	}
@@ -57,7 +76,7 @@ func (g *Generator) components(recipes []ComponentRecipe) []Component {
 	return comps
 }
 
-// component builds a Component according to the provided ComponentRecipe.
+// component generates a Component according to the provided ComponentRecipe.
 func (g *Generator) component(recipe ComponentRecipe) Component {
 	props := []Property{}
 	for _, p := range recipe.PropertyRecipes() {
@@ -68,29 +87,4 @@ func (g *Generator) component(recipe ComponentRecipe) Component {
 		Name:       recipe.Name,
 		Properties: props,
 	}
-}
-
-// item generates an item according to the provided ItemRecipe.
-func (g *Generator) item(recipe ItemRecipe) Item {
-	comps := g.components(recipe.ComponentRecipes())
-	t, err := template.ParseFiles(fileItemTemplate)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	s := &strings.Builder{}
-	i := Item{
-		Name:       recipe.Name,
-		Descriptor: comps[0].RandProperty().Attribute,
-		Components: comps,
-	}
-
-	t.Execute(s, i)
-	i.Text = s.String()
-	return i
-}
-
-// Item generates a random item corresponding to one of the loaded ItemRecipes.
-func (g *Generator) Item() Item {
-	return g.item(g.recipe())
 }

@@ -7,26 +7,27 @@ import (
 	"math/rand"
 )
 
-// Verb describes a verb and its equivalent variants.
+// Verb contains a verb and its synonyms.
 type Verb struct {
 	Name     string   `json:"name"`
-	Variants []string `json:"variants"`
+	Synonyms []string `json:"variants"`
 }
 
 // RandVariant returns a random variant from the Verb's Variants slice.
 func (v Verb) RandVariant() string {
-	return v.Variants[rand.Intn(len(v.Variants))]
+	i := rand.Intn(len(v.Synonyms))
+	return v.Synonyms[i]
 }
 
 func loadVerbs(filenames ...string) map[string]Verb {
-	out := make(map[string]Verb)
+	loaded := make(map[string]Verb)
 
 	verbs := readVerbs(filenames...)
 	for _, v := range verbs {
-		out[v.Name] = v
+		loaded[v.Name] = v
 	}
 
-	return out
+	return loaded
 }
 
 func readVerbs(filenames ...string) []Verb {

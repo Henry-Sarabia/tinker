@@ -5,6 +5,6 @@ import (
 )
 
 func randomString(s []string) string {
-	r := rand.Intn(len(s))
-	return s[r]
+	i := rand.Intn(len(s))
+	return s[i]
 }

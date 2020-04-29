@@ -7,7 +7,7 @@ import (
 	"math/rand"
 )
 
-// ItemRecipe outlines how to generate a specific type of item.
+// ItemRecipe defines how to generate a specific type of item.
 type ItemRecipe struct {
 	Name       string            `json:"name"`
 	Components []ComponentRecipe `json:"components"`
@@ -15,18 +15,18 @@ type ItemRecipe struct {
 
 // ComponentRecipes returns the Recipe's ComponentRecipes according to their respective
 // frequencies.
-func (r *ItemRecipe) ComponentRecipes() []ComponentRecipe {
-	recipes := []ComponentRecipe{}
-	for _, c := range r.Components {
+func (ir *ItemRecipe) ComponentRecipes() []ComponentRecipe {
+	rcps := []ComponentRecipe{}
+	for _, c := range ir.Components {
 		if c.Frequency >= rand.Float64() {
-			recipes = append(recipes, c)
+			rcps = append(rcps, c)
 		}
 	}
-	return recipes
+	return rcps
 }
 
 func readItemRecipes(filenames ...string) []ItemRecipe {
-	var recs []ItemRecipe
+	var rcps []ItemRecipe
 
 	for _, fn := range filenames {
 		f, err := ioutil.ReadFile(fn)
@@ -34,12 +34,12 @@ func readItemRecipes(filenames ...string) []ItemRecipe {
 			log.Fatal(err)
 		}
 
-		rec := []ItemRecipe{}
-		if err := json.Unmarshal(f, &rec); err != nil {
+		rcp := []ItemRecipe{}
+		if err := json.Unmarshal(f, &rcp); err != nil {
 			log.Fatal(err)
 		}
 
-		recs = append(recs, rec...)
+		rcps = append(rcps, rcp...)
 	}
-	return recs
+	return rcps
 }

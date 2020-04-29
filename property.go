@@ -7,8 +7,6 @@ type Property struct {
 	Verb      string
 }
 
-// dont try to return strings, try to return a well-composed struct
-
 // PropertyRecipe describes a physical property such as material or shape.
 type PropertyRecipe struct {
 	Name           string   `json:"name"`

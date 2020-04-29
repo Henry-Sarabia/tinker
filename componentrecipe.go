@@ -2,7 +2,7 @@ package tinker
 
 import "math/rand"
 
-// ComponentRecipe describes how to generate a physical part of an Item.
+// ComponentRecipe defines how to generate a piece of an Item.
 type ComponentRecipe struct {
 	Name       string           `json:"name"`
 	Frequency  float64          `json:"frequency"`
@@ -11,12 +11,12 @@ type ComponentRecipe struct {
 
 // PropertyRecipes returns the Component's PropertyRecipes according to their respective
 // frequencies.
-func (c *ComponentRecipe) PropertyRecipes() []PropertyRecipe {
-	recipes := []PropertyRecipe{}
-	for _, p := range c.Properties {
+func (cr *ComponentRecipe) PropertyRecipes() []PropertyRecipe {
+	rcps := []PropertyRecipe{}
+	for _, p := range cr.Properties {
 		if p.Frequency >= rand.Float64() {
-			recipes = append(recipes, p)
+			rcps = append(rcps, p)
 		}
 	}
-	return recipes
+	return rcps
 }
