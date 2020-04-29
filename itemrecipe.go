@@ -3,8 +3,9 @@ package tinker
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"math/rand"
+
+	"github.com/pkg/errors"
 )
 
 // ItemRecipe defines how to generate a specific type of item.
@@ -25,21 +26,21 @@ func (ir *ItemRecipe) ComponentRecipes() []ComponentRecipe {
 	return rcps
 }
 
-func readItemRecipes(filenames ...string) []ItemRecipe {
+func readItemRecipes(filenames ...string) ([]ItemRecipe, error) {
 	var rcps []ItemRecipe
 
 	for _, fn := range filenames {
 		f, err := ioutil.ReadFile(fn)
 		if err != nil {
-			log.Fatal(err)
+			return nil, errors.Wrapf(err, "cannot read file '%s'", fn)
 		}
 
 		rcp := []ItemRecipe{}
 		if err := json.Unmarshal(f, &rcp); err != nil {
-			log.Fatal(err)
+			return nil, errors.Wrapf(err, "cannot unmarshal ItemRecipes from file '%s'", fn)
 		}
 
 		rcps = append(rcps, rcp...)
 	}
-	return rcps
+	return rcps, nil
 }

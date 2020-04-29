@@ -2,9 +2,10 @@ package tinker
 
 import (
 	"html/template"
-	"log"
 	"math/rand"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 const (
@@ -26,31 +27,48 @@ type Generator struct {
 }
 
 // New returns a properly configured Generator.
-func New() *Generator {
-	items := readItemRecipes(fileItems)
-	atbs := loadAttributeRecipes(fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities)
-	verbs := loadVerbs(fileVerbs)
+func New() (*Generator, error) {
+	items, err := readItemRecipes(fileItems)
+	if err != nil {
+		return nil, err
+	}
+
+	atbs, err := loadAttributeRecipes(fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities)
+	if err != nil {
+		return nil, err
+	}
+
+	verbs, err := loadVerbs(fileVerbs)
+	if err != nil {
+		return nil, err
+	}
+
 	g := &Generator{
 		Items:      items,
 		Attributes: atbs,
 		Verbs:      verbs,
 	}
 
-	return g
+	return g, nil
 }
 
 // Item generates a random item corresponding to one of the loaded ItemRecipes.
-func (g *Generator) Item() Item {
+func (g *Generator) Item() (Item, error) {
 	i := rand.Intn(len(g.Items))
-	return g.item(g.Items[i])
+	it, err := g.item(g.Items[i])
+	if err != nil {
+		return Item{}, err
+	}
+
+	return it, err
 }
 
 // item generates an item according to the provided ItemRecipe.
-func (g *Generator) item(rcp ItemRecipe) Item {
+func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 	comps := g.components(rcp.ComponentRecipes())
 	t, err := template.ParseFiles(fileItemTemplate)
 	if err != nil {
-		log.Fatal(err)
+		return Item{}, errors.Wrap(err, "cannot parse template")
 	}
 
 	it := Item{
@@ -62,7 +80,7 @@ func (g *Generator) item(rcp ItemRecipe) Item {
 	wr := &strings.Builder{}
 	t.Execute(wr, it)
 	it.Description = wr.String()
-	return it
+	return it, nil
 }
 
 // components generates a slice of Components according to the provided ComponentRecipes.

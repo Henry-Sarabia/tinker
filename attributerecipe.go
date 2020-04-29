@@ -3,8 +3,9 @@ package tinker
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"math/rand"
+
+	"github.com/pkg/errors"
 )
 
 const (
@@ -56,32 +57,35 @@ func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) Attribute {
 	}
 }
 
-func loadAttributeRecipes(filenames ...string) map[string]AttributeRecipe {
+func loadAttributeRecipes(filenames ...string) (map[string]AttributeRecipe, error) {
 	loaded := make(map[string]AttributeRecipe)
 
-	rcps := readAttributeRecipes(filenames...)
+	rcps, err := readAttributeRecipes(filenames...)
+	if err != nil {
+		return nil, err
+	}
 	for _, r := range rcps {
 		loaded[r.Name] = r
 	}
 
-	return loaded
+	return loaded, nil
 }
 
-func readAttributeRecipes(filenames ...string) []AttributeRecipe {
+func readAttributeRecipes(filenames ...string) ([]AttributeRecipe, error) {
 	var rcps []AttributeRecipe
 
 	for _, fn := range filenames {
 		f, err := ioutil.ReadFile(fn)
 		if err != nil {
-			log.Fatal(err)
+			return nil, errors.Wrapf(err, "cannot read file '%s'", fn)
 		}
 
 		rcp := []AttributeRecipe{}
 		if err := json.Unmarshal(f, &rcp); err != nil {
-			log.Fatal(err)
+			return nil, errors.Wrapf(err, "cannot unmarshal AttributeRecipes from file '%s'", fn)
 		}
 
 		rcps = append(rcps, rcp...)
 	}
-	return rcps
+	return rcps, nil
 }
