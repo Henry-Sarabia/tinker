@@ -21,9 +21,9 @@ const (
 
 // Generator generates items using the provided recipes.
 type Generator struct {
-	Items      []ItemRecipe
-	Attributes map[string]AttributeRecipe
-	Verbs      map[string]Verb
+	ItemBank []ItemRecipe
+	AtbBank  map[string]AttributeRecipe
+	VerbBank map[string]Verb
 }
 
 // New returns a properly configured Generator.
@@ -44,9 +44,9 @@ func New() (*Generator, error) {
 	}
 
 	g := &Generator{
-		Items:      items,
-		Attributes: atbs,
-		Verbs:      verbs,
+		ItemBank: items,
+		AtbBank:  atbs,
+		VerbBank: verbs,
 	}
 
 	return g, nil
@@ -54,8 +54,8 @@ func New() (*Generator, error) {
 
 // Item generates a random item corresponding to one of the loaded ItemRecipes.
 func (g *Generator) Item() (Item, error) {
-	i := rand.Intn(len(g.Items))
-	it, err := g.item(g.Items[i])
+	i := rand.Intn(len(g.ItemBank))
+	it, err := g.item(g.ItemBank[i])
 	if err != nil {
 		return Item{}, err
 	}
@@ -104,7 +104,7 @@ func (g *Generator) components(rcps []ComponentRecipe) ([]Component, error) {
 func (g *Generator) component(rcp ComponentRecipe) (Component, error) {
 	props := []Property{}
 	for _, p := range rcp.PropertyRecipes() {
-		prop, err := p.property(g.Attributes, g.Verbs)
+		prop, err := p.property(g.AtbBank, g.VerbBank)
 		if err != nil {
 			return Component{}, err
 		}
