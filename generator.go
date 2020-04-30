@@ -65,7 +65,10 @@ func (g *Generator) Item() (Item, error) {
 
 // item generates an item according to the provided ItemRecipe.
 func (g *Generator) item(rcp ItemRecipe) (Item, error) {
-	comps := g.components(rcp.ComponentRecipes())
+	comps, err := g.components(rcp.ComponentRecipes())
+	if err != nil {
+		return Item{}, err
+	}
 	t, err := template.ParseFiles(fileItemTemplate)
 	if err != nil {
 		return Item{}, errors.Wrap(err, "cannot parse template")
@@ -84,25 +87,33 @@ func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 }
 
 // components generates a slice of Components according to the provided ComponentRecipes.
-func (g *Generator) components(rcps []ComponentRecipe) []Component {
+func (g *Generator) components(rcps []ComponentRecipe) ([]Component, error) {
 	comps := []Component{}
 	for _, r := range rcps {
-		comp := g.component(r)
+		comp, err := g.component(r)
+		if err != nil {
+			return nil, err
+		}
 		comps = append(comps, comp)
 	}
 
-	return comps
+	return comps, nil
 }
 
 // component generates a Component according to the provided ComponentRecipe.
-func (g *Generator) component(recipe ComponentRecipe) Component {
+func (g *Generator) component(rcp ComponentRecipe) (Component, error) {
 	props := []Property{}
-	for _, p := range recipe.PropertyRecipes() {
-		props = append(props, p.property(g.Attributes, g.Verbs))
+	for _, p := range rcp.PropertyRecipes() {
+		prop, err := p.property(g.Attributes, g.Verbs)
+		if err != nil {
+			return Component{}, err
+		}
+
+		props = append(props, prop)
 	}
 
 	return Component{
-		Name:       recipe.Name,
+		Name:       rcp.Name,
 		Properties: props,
-	}
+	}, nil
 }

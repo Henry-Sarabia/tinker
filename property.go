@@ -15,12 +15,17 @@ type PropertyRecipe struct {
 	VerbNames      []string `json:"verb_names"`
 }
 
-func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) Property {
-	a := randString(p.AttributeNames)
+func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) (Property, error) {
+	n := randString(p.AttributeNames)
+	atb, err := atbs[n].attribute(atbs)
+	if err != nil {
+		return Property{}, nil
+	}
+
 	v := randString(p.VerbNames)
 	return Property{
 		Name:      p.Name,
-		Attribute: atbs[a].attribute(atbs),
+		Attribute: atb,
 		Verb:      verbs[v].RandVariant(),
-	}
+	}, nil
 }

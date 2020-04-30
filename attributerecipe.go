@@ -2,6 +2,7 @@ package tinker
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"math/rand"
 
@@ -28,33 +29,47 @@ type AttributeRecipe struct {
 }
 
 // description returns a description of the AttributeRecipe.
-func (a AttributeRecipe) description(bank map[string]AttributeRecipe) string {
-	var d string
+func (a AttributeRecipe) description(bank map[string]AttributeRecipe) (string, error) {
+	var desc string
 	pb := rand.Float64()
 
 	switch {
 	case pb < pbCommon:
-		d = randString(a.Common)
+		desc = randString(a.Common)
 	case pb < pbUncommon+pbCommon:
-		d = randString(a.Uncommon)
+		desc = randString(a.Uncommon)
 	case pb < pbRare+pbUncommon+pbCommon:
-		d = randString(a.Rare)
+		desc = randString(a.Rare)
 	}
 
 	if len(a.PrefixNames) > 0 && rand.Float64() > pbChainPrefix {
 		n := randString(a.PrefixNames)
-		d = bank[n].description(bank) + " " + d
+		pfx, ok := bank[n]
+		if !ok {
+			return "", fmt.Errorf("cannot find prefix AttributeRecipe '%s'", n)
+		}
+		p, err := pfx.description(bank)
+		if err != nil {
+			return "", err
+		}
+		desc = p + " " + desc
+
 	}
 
-	return d
+	return desc, nil
 }
 
 // attribute returns an Attribute according to the AttributeRecipe.
-func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) Attribute {
+func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, error) {
+	d, err := a.description(bank)
+	if err != nil {
+		return Attribute{}, err
+	}
+
 	return Attribute{
 		Name:        a.Name,
-		Description: a.description(bank),
-	}
+		Description: d,
+	}, nil
 }
 
 func loadAttributeRecipes(filenames ...string) (map[string]AttributeRecipe, error) {
