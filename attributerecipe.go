@@ -48,12 +48,13 @@ func (a AttributeRecipe) description(bank map[string]AttributeRecipe) (string, e
 		if !ok {
 			return "", fmt.Errorf("cannot find prefix AttributeRecipe '%s'", n)
 		}
+
 		p, err := pfx.description(bank)
 		if err != nil {
 			return "", err
 		}
-		desc = p + " " + desc
 
+		desc = p + " " + desc
 	}
 
 	return desc, nil
