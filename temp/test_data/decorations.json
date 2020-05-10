@@ -2,16 +2,16 @@
     {
         "name": "engraving",
         "common": [
-            "etchings",
-            "carvings"
+            "etching",
+            "carving"
         ],
         "uncommon": [
-            "engravings",
-            "inscriptions"
+            "engraving",
+            "inscription"
         ],
         "rare": [
-            "runes",
-            "ciphers"
+            "rune",
+            "cipher"
         ],
         "prefix_names": [
             "language"

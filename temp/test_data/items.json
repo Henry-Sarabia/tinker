@@ -9,6 +9,7 @@
                     {
                         "name": "material",
                         "frequency": 1.0,
+                        "countable": false,
                         "attribute_names": [
                             "wood",
                             "base metal",
@@ -21,6 +22,7 @@
                     {
                         "name": "decoration",
                         "frequency": 0.02,
+                        "countable": true,
                         "attribute_names": [
                             "engraving"
                         ],
@@ -37,6 +39,7 @@
                     {
                         "name": "material",
                         "frequency": 1.0,
+                        "countable": false,
                         "attribute_names": [
                             "wood",
                             "bone",
@@ -50,8 +53,10 @@
                     {
                         "name": "decoration",
                         "frequency": 0.5,
+                        "countable": true,
                         "attribute_names": [
-                            "gem"
+                            "gem",
+                            "engraving"
                         ],
                         "verb_names": [
                             "decorated with"
@@ -71,6 +76,7 @@
                     {
                         "name": "shape",
                         "frequency": 1.0,
+                        "countable": true,
                         "attribute_names": [
                             "humanoid",
                             "monstrosity"
@@ -82,6 +88,7 @@
                     {
                         "name": "material",
                         "frequency": 1.0,
+                        "countable": false,
                         "attribute_names": [
                             "base metal",
                             "precious metal",

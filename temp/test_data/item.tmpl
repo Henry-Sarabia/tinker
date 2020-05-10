@@ -9,5 +9,9 @@ The {{.Name}} is {{template "property" (index .Properties 0)}}
 {{- end -}}
 
 {{define "property"}}
-{{- .Verb}} {{"{{"}}.Article{{"}}"}} {{.Attribute.Description -}}
+{{- if .Article -}}
+{{- .Verb}} {{.Article}} {{.Attribute.Description -}}
+{{- else}}
+{{- .Verb}} {{.Attribute.Description -}}
+{{- end}}
 {{- end -}}
