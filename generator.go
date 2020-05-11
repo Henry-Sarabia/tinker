@@ -26,30 +26,39 @@ type Generator struct {
 	VerbBank map[string]Verb
 }
 
-// New returns a properly configured Generator.
-func New() (*Generator, error) {
-	items, err := readItemRecipes(fileItems)
+// New returns an unloaded Generator.
+func New() *Generator {
+	return &Generator{}
+}
+
+// LoadItemRecipes loads the provided files into the Generator.
+func (g *Generator) LoadItemRecipes(filenames ...string) error {
+	rcps, err := readItemRecipes(filenames...)
 	if err != nil {
-		return nil, err
+		return err
 	}
+	g.ItemBank = rcps
+	return nil
+}
 
-	atbs, err := loadAttributeRecipes(fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities)
+// LoadAttributeRecipes loads the provided files into the Generator.
+func (g *Generator) LoadAttributeRecipes(filenames ...string) error {
+	rcps, err := loadAttributeRecipes(filenames...)
 	if err != nil {
-		return nil, err
+		return err
 	}
+	g.AtbBank = rcps
+	return nil
+}
 
-	verbs, err := loadVerbs(fileVerbs)
+// LoadVerbs loads the provided files into the Generator.
+func (g *Generator) LoadVerbs(filenames ...string) error {
+	verbs, err := loadVerbs(filenames...)
 	if err != nil {
-		return nil, err
+		return err
 	}
-
-	g := &Generator{
-		ItemBank: items,
-		AtbBank:  atbs,
-		VerbBank: verbs,
-	}
-
-	return g, nil
+	g.VerbBank = verbs
+	return nil
 }
 
 // Item generates a random item corresponding to one of the loaded ItemRecipes.
