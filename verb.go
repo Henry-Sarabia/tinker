@@ -3,7 +3,6 @@ package tinker
 import (
 	"encoding/json"
 	"io/ioutil"
-	"math/rand"
 
 	"github.com/pkg/errors"
 )
@@ -16,8 +15,7 @@ type Verb struct {
 
 // RandVariant returns a random variant from the Verb's Variants slice.
 func (v Verb) RandVariant() string {
-	i := rand.Intn(len(v.Synonyms))
-	return v.Synonyms[i]
+	return randString(v.Synonyms)
 }
 
 func loadVerbs(filenames ...string) (map[string]Verb, error) {

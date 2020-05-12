@@ -10,15 +10,6 @@ type Property struct {
 	Article   string
 }
 
-// checkArticle returns the appropriate article.
-func checkArticle(word string, countable bool) string {
-	if !countable {
-		return ""
-	}
-
-	return article.Indefinite(word)
-}
-
 // PropertyRecipe describes a physical property such as material or shape.
 type PropertyRecipe struct {
 	Name           string   `json:"name"`
@@ -43,4 +34,13 @@ func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[str
 		Verb:      verbs[v].RandVariant(),
 		Article:   checkArticle(atb.Description, p.Countable),
 	}, nil
+}
+
+// checkArticle returns the appropriate article.
+func checkArticle(word string, countable bool) string {
+	if !countable {
+		return ""
+	}
+
+	return article.Indefinite(word)
 }

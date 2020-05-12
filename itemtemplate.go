@@ -1,4 +1,6 @@
-You find a {{.Prelude.Name}} {{.Name}}.
+package tinker
+
+const itemTemplate string = `You find a {{.Prelude.Name}} {{.Name}}.
 {{- range .Components -}}
 {{template "component" .}}
 {{- end -}}
@@ -15,3 +17,4 @@ The {{.Name}} is {{template "property" (index .Properties 0)}}
 {{- .Verb}} {{.Attribute.Description -}}
 {{- end}}
 {{- end -}}
+`

@@ -4,19 +4,6 @@ import (
 	"html/template"
 	"math/rand"
 	"strings"
-
-	"github.com/pkg/errors"
-)
-
-const (
-	fileItemTemplate string = "test_data/item.tmpl"
-	fileItems        string = "test_data/items.json"
-	fileAdverbs      string = "test_data/adverbs.json"
-	fileCreatures    string = "test_data/creatures.json"
-	fileDecorations  string = "test_data/decorations.json"
-	fileMaterials    string = "test_data/materials.json"
-	fileQualities    string = "test_data/qualities.json"
-	fileVerbs        string = "test_data/verbs.json"
 )
 
 // Generator generates items using the provided recipes.
@@ -78,10 +65,7 @@ func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 	if err != nil {
 		return Item{}, err
 	}
-	t, err := template.ParseFiles(fileItemTemplate)
-	if err != nil {
-		return Item{}, errors.Wrap(err, "cannot parse template")
-	}
+	t, err := template.New("item").Parse(itemTemplate)
 
 	it := Item{
 		Name:       rcp.Name,
