@@ -77,3 +77,68 @@ func TestGenerator_LoadItemRecipes(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerator_LoadAttributeRecipes(t *testing.T) {
+	tests := []struct {
+		name     string
+		g        *Generator
+		files    []string
+		wantName string
+		wantLen  int
+		wantErr  bool
+	}{
+		{
+			name:     "Single file",
+			g:        &Generator{},
+			files:    []string{fileMaterials},
+			wantName: "wood",
+			wantLen:  6,
+			wantErr:  false,
+		},
+		{
+			name:     "Multiple files",
+			g:        &Generator{},
+			files:    []string{fileMaterials, fileCreatures, fileDecorations},
+			wantName: "wood",
+			wantLen:  10,
+			wantErr:  false,
+		},
+		{
+			name:     "Nil files slice",
+			g:        &Generator{},
+			files:    nil,
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Empty files slice",
+			g:        &Generator{},
+			files:    []string{},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := test.g.LoadAttributeRecipes(test.files...)
+			if (err != nil) != test.wantErr {
+				t.Fatalf("got err?: <%t>, want err?: <%t>\nerror: <%v>", (err != nil), test.wantErr, err)
+			}
+
+			if len(test.g.ItemBank) != test.wantLen {
+				t.Errorf("got: <%v>, want: <%v>", test.g.ItemBank, test.wantLen)
+			}
+
+			if test.wantLen <= 0 {
+				return
+			}
+
+			if test.g.ItemBank[0].Name != test.wantName {
+				t.Errorf("got: <%s>, want: <%s>", test.g.ItemBank[0].Name, test.wantName)
+			}
+
+		})
+	}
+}
