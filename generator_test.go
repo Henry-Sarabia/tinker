@@ -5,13 +5,23 @@ import (
 )
 
 const (
-	fileItems       string = "test_data/items.json"
+	// Item recipes
+	fileWeapons string = "test_data/weapons.json"
+	fileArt     string = "test_data/art.json"
+
+	// Attribute recipes
 	fileAdverbs     string = "test_data/adverbs.json"
 	fileCreatures   string = "test_data/creatures.json"
 	fileDecorations string = "test_data/decorations.json"
 	fileMaterials   string = "test_data/materials.json"
 	fileQualities   string = "test_data/qualities.json"
-	fileVerbs       string = "test_data/verbs.json"
+
+	// Verbs
+	fileVerbs string = "test_data/verbs.json"
+
+	// Edge cases
+	testFileBlank     string = "test_data/blank.json"
+	testFileEmptyJSON string = "test_data/empty.json"
 )
 
 func TestGenerator_New(t *testing.T) {
@@ -31,11 +41,19 @@ func TestGenerator_LoadItemRecipes(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name:     "Happy Path",
+			name:     "Single file",
 			g:        &Generator{},
-			files:    []string{fileItems},
+			files:    []string{fileWeapons},
 			wantName: "sword",
 			wantLen:  2,
+			wantErr:  false,
+		},
+		{
+			name:     "Multiple files",
+			g:        &Generator{},
+			files:    []string{fileWeapons, fileArt},
+			wantName: "sword",
+			wantLen:  3,
 			wantErr:  false,
 		},
 		{
@@ -53,6 +71,22 @@ func TestGenerator_LoadItemRecipes(t *testing.T) {
 			wantName: "",
 			wantLen:  0,
 			wantErr:  false,
+		},
+		{
+			name:     "Empty JSON",
+			g:        &Generator{},
+			files:    []string{testFileEmptyJSON},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Blank file",
+			g:        &Generator{},
+			files:    []string{testFileBlank},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  true,
 		},
 	}
 	for _, test := range tests {
@@ -119,6 +153,22 @@ func TestGenerator_LoadAttributeRecipes(t *testing.T) {
 			wantLen:  0,
 			wantErr:  false,
 		},
+		{
+			name:     "Empty JSON",
+			g:        &Generator{},
+			files:    []string{testFileEmptyJSON},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Blank file",
+			g:        &Generator{},
+			files:    []string{testFileBlank},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  true,
+		},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
@@ -127,16 +177,16 @@ func TestGenerator_LoadAttributeRecipes(t *testing.T) {
 				t.Fatalf("got err?: <%t>, want err?: <%t>\nerror: <%v>", (err != nil), test.wantErr, err)
 			}
 
-			if len(test.g.ItemBank) != test.wantLen {
-				t.Errorf("got: <%v>, want: <%v>", test.g.ItemBank, test.wantLen)
+			if len(test.g.AtbBank) != test.wantLen {
+				t.Errorf("got: <%v>, want: <%v>", test.g.AtbBank, test.wantLen)
 			}
 
 			if test.wantLen <= 0 {
 				return
 			}
 
-			if test.g.ItemBank[0].Name != test.wantName {
-				t.Errorf("got: <%s>, want: <%s>", test.g.ItemBank[0].Name, test.wantName)
+			if test.g.AtbBank[test.wantName].Name != test.wantName {
+				t.Errorf("got: <%s>, want: <%s>", test.g.AtbBank[test.wantName].Name, test.wantName)
 			}
 
 		})

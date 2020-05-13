@@ -1,4 +1,5 @@
 //+build
+
 package tinker
 
 import (

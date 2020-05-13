@@ -21,7 +21,7 @@
                     },
                     {
                         "name": "decoration",
-                        "frequency": 0.02,
+                        "frequency": 0.2,
                         "countable": true,
                         "attribute_names": [
                             "engraving"
@@ -67,37 +67,63 @@
         ]
     },
     {
-        "name": "figurine",
+        "name": "axe",
         "components": [
             {
-                "name": "figurine",
+                "name": "head",
                 "frequency": 1.0,
                 "properties": [
-                    {
-                        "name": "shape",
-                        "frequency": 1.0,
-                        "countable": true,
-                        "attribute_names": [
-                            "humanoid",
-                            "monstrosity"
-                        ],
-                        "verb_names": [
-                            "shaped like"
-                        ]
-                    },
                     {
                         "name": "material",
                         "frequency": 1.0,
                         "countable": false,
                         "attribute_names": [
-                            "base metal",
-                            "precious metal",
+                            "wood",
+                            "base metal"
+                        ],
+                        "verb_names": [
+                            "made of"
+                        ]
+                    },
+                    {
+                        "name": "decoration",
+                        "frequency": 0.1,
+                        "countable": true,
+                        "attribute_names": [
+                            "engraving"
+                        ],
+                        "verb_names": [
+                            "decorated with"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "handle",
+                "frequency": 1.0,
+                "properties": [
+                    {
+                        "name": "material",
+                        "frequency": 1.0,
+                        "countable": false,
+                        "attribute_names": [
                             "wood",
                             "bone",
-                            "gem"
+                            "base metal"
                         ],
-                        "verb_names":[
+                        "verb_names": [
                             "made of"
+                        ]
+                    },
+                    {
+                        "name": "decoration",
+                        "frequency": 0.5,
+                        "countable": true,
+                        "attribute_names": [
+                            "engraving"
+                        ],
+                        "verb_names": [
+                            "decorated with"
                         ]
                     }
                 ]
