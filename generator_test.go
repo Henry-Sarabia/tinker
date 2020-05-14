@@ -97,7 +97,7 @@ func TestGenerator_LoadItemRecipes(t *testing.T) {
 			}
 
 			if len(test.g.ItemBank) != test.wantLen {
-				t.Errorf("got: <%v>, want: <%v>", test.g.ItemBank, test.wantLen)
+				t.Errorf("got: <%v>, want: <%v>", len(test.g.ItemBank), test.wantLen)
 			}
 
 			if test.wantLen <= 0 {
@@ -178,7 +178,7 @@ func TestGenerator_LoadAttributeRecipes(t *testing.T) {
 			}
 
 			if len(test.g.AtbBank) != test.wantLen {
-				t.Errorf("got: <%v>, want: <%v>", test.g.AtbBank, test.wantLen)
+				t.Errorf("got: <%v>, want: <%v>", len(test.g.AtbBank), test.wantLen)
 			}
 
 			if test.wantLen <= 0 {
@@ -187,6 +187,79 @@ func TestGenerator_LoadAttributeRecipes(t *testing.T) {
 
 			if test.g.AtbBank[test.wantName].Name != test.wantName {
 				t.Errorf("got: <%s>, want: <%s>", test.g.AtbBank[test.wantName].Name, test.wantName)
+			}
+
+		})
+	}
+}
+
+func TestGenerator_LoadVerbs(t *testing.T) {
+	tests := []struct {
+		name     string
+		g        *Generator
+		files    []string
+		wantName string
+		wantLen  int
+		wantErr  bool
+	}{
+		{
+			name:     "Single file",
+			g:        &Generator{},
+			files:    []string{fileVerbs},
+			wantName: "made of",
+			wantLen:  3,
+			wantErr:  false,
+		},
+		{
+			name:     "Nil files slice",
+			g:        &Generator{},
+			files:    nil,
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Empty files slice",
+			g:        &Generator{},
+			files:    []string{},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Empty JSON",
+			g:        &Generator{},
+			files:    []string{testFileEmptyJSON},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  false,
+		},
+		{
+			name:     "Blank file",
+			g:        &Generator{},
+			files:    []string{testFileBlank},
+			wantName: "",
+			wantLen:  0,
+			wantErr:  true,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := test.g.LoadVerbs(test.files...)
+			if (err != nil) != test.wantErr {
+				t.Fatalf("got err?: <%t>, want err?: <%t>\nerror: <%v>", (err != nil), test.wantErr, err)
+			}
+
+			if len(test.g.VerbBank) != test.wantLen {
+				t.Errorf("got: <%v>, want: <%v>", len(test.g.VerbBank), test.wantLen)
+			}
+
+			if test.wantLen <= 0 {
+				return
+			}
+
+			if test.g.VerbBank[test.wantName].Name != test.wantName {
+				t.Errorf("got: <%s>, want: <%s>", test.g.VerbBank[test.wantName].Name, test.wantName)
 			}
 
 		})

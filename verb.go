@@ -38,12 +38,12 @@ func readVerbs(filenames ...string) ([]Verb, error) {
 	for _, fn := range filenames {
 		f, err := ioutil.ReadFile(fn)
 		if err != nil {
-			errors.Wrapf(err, "cannot read file '%s'", fn)
+			return nil, errors.Wrapf(err, "cannot read file '%s'", fn)
 		}
 
 		v := []Verb{}
 		if err := json.Unmarshal(f, &v); err != nil {
-			errors.Wrapf(err, "cannot unmarshal Verbs from file '%s'", fn)
+			return nil, errors.Wrapf(err, "cannot unmarshal Verbs from file '%s'", fn)
 		}
 
 		verbs = append(verbs, v...)
