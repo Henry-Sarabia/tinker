@@ -268,12 +268,11 @@ func TestGenerator_LoadVerbs(t *testing.T) {
 
 func TestGenerator_Item(t *testing.T) {
 	tests := []struct {
-		name  string
-		g     *Generator
-		items []string
-		atbs  []string
-		verbs []string
-		want
+		name    string
+		g       *Generator
+		items   []string
+		atbs    []string
+		verbs   []string
 		wantErr bool
 	}{
 		{
@@ -282,6 +281,30 @@ func TestGenerator_Item(t *testing.T) {
 			items:   []string{fileWeapons, fileArt},
 			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
 			verbs:   []string{fileVerbs},
+			wantErr: false,
+		},
+		{
+			name:    "Missing item recipes",
+			g:       &Generator{},
+			items:   []string{},
+			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
+			verbs:   []string{fileVerbs},
+			wantErr: true,
+		},
+		{
+			name:    "Missing attributes",
+			g:       &Generator{},
+			items:   []string{fileWeapons, fileArt},
+			atbs:    []string{},
+			verbs:   []string{fileVerbs},
+			wantErr: false,
+		},
+		{
+			name:    "Missing verbs",
+			g:       &Generator{},
+			items:   []string{fileWeapons, fileArt},
+			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
+			verbs:   []string{},
 			wantErr: false,
 		},
 	}
@@ -302,10 +325,17 @@ func TestGenerator_Item(t *testing.T) {
 				t.Fatalf("got err?: <%t>, want err?: <%t>\nerror: <%v>", (err != nil), test.wantErr, err)
 			}
 
-			if got != test.want {
-
+			if test.wantErr {
+				return
 			}
 
+			if got.Name == "" {
+				t.Errorf("got: empty name, want: non-empty name")
+			}
+
+			if got.Description == "" {
+				t.Errorf("got: empty description, want: non-empty description")
+			}
 		})
 	}
 }

@@ -1,6 +1,7 @@
 package tinker
 
 import (
+	"errors"
 	"html/template"
 	"math/rand"
 	"strings"
@@ -50,6 +51,10 @@ func (g *Generator) LoadVerbs(filenames ...string) error {
 
 // Item generates a random item corresponding to one of the loaded ItemRecipes.
 func (g *Generator) Item() (Item, error) {
+	if len(g.ItemBank) <= 0 {
+		return Item{}, errors.New("no item recipes have been loaded")
+	}
+
 	i := rand.Intn(len(g.ItemBank))
 	it, err := g.item(g.ItemBank[i])
 	if err != nil {
