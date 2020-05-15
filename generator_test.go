@@ -265,3 +265,47 @@ func TestGenerator_LoadVerbs(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerator_Item(t *testing.T) {
+	tests := []struct {
+		name  string
+		g     *Generator
+		items []string
+		atbs  []string
+		verbs []string
+		want
+		wantErr bool
+	}{
+		{
+			name:    "Happy path",
+			g:       &Generator{},
+			items:   []string{fileWeapons, fileArt},
+			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
+			verbs:   []string{fileVerbs},
+			wantErr: false,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if err := test.g.LoadItemRecipes(test.items...); err != nil {
+				t.Fatal(err)
+			}
+			if err := test.g.LoadAttributeRecipes(test.atbs...); err != nil {
+				t.Fatal(err)
+			}
+			if err := test.g.LoadVerbs(test.verbs...); err != nil {
+				t.Fatal(err)
+			}
+
+			got, err := test.g.Item()
+			if (err != nil) != test.wantErr {
+				t.Fatalf("got err?: <%t>, want err?: <%t>\nerror: <%v>", (err != nil), test.wantErr, err)
+			}
+
+			if got != test.want {
+
+			}
+
+		})
+	}
+}
