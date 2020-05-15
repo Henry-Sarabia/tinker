@@ -276,7 +276,7 @@ func TestGenerator_Item(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "Happy path",
+			name:    "No missing data",
 			g:       &Generator{},
 			items:   []string{fileWeapons, fileArt},
 			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
@@ -304,6 +304,14 @@ func TestGenerator_Item(t *testing.T) {
 			g:       &Generator{},
 			items:   []string{fileWeapons, fileArt},
 			atbs:    []string{fileAdverbs, fileCreatures, fileDecorations, fileMaterials, fileQualities},
+			verbs:   []string{},
+			wantErr: false,
+		},
+		{
+			name:    "Missing attributes and verbs",
+			g:       &Generator{},
+			items:   []string{fileWeapons, fileArt},
+			atbs:    []string{},
 			verbs:   []string{},
 			wantErr: false,
 		},
