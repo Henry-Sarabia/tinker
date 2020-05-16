@@ -1,13 +1,11 @@
 package tinker
 
-import "github.com/Henry-Sarabia/article"
-
 // Property describes a specific physical property such as material or shape.
 type Property struct {
 	Name      string
 	Attribute Attribute
 	Verb      string
-	Article   string
+	Countable bool
 }
 
 // PropertyRecipe describes a physical property such as material or shape.
@@ -32,15 +30,6 @@ func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[str
 		Name:      p.Name,
 		Attribute: atb,
 		Verb:      verbs[v].RandVariant(),
-		Article:   checkArticle(atb.Description, p.Countable),
+		Countable: p.Countable,
 	}, nil
-}
-
-// checkArticle returns the appropriate article.
-func checkArticle(word string, countable bool) string {
-	if !countable {
-		return ""
-	}
-
-	return article.Indefinite(word)
 }

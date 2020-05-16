@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"strings"
 
+	"github.com/Henry-Sarabia/article"
 	"github.com/pkg/errors"
 )
 
@@ -92,7 +93,8 @@ func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, 
 
 	return Attribute{
 		Name:        d[len(d)-1],
-		Description: strings.Join(d, " "),
+		Description: strings.TrimSpace(strings.Join(d, " ")),
+		Article:     article.Indefinite(d[0]),
 	}, nil
 }
 
