@@ -28,36 +28,58 @@ type AttributeRecipe struct {
 	PrefixNames []string `json:"prefix_names"`
 }
 
-// description returns a description of the AttributeRecipe.
+// description returns a written description of an AttributeRecipe.
 func (a AttributeRecipe) description(bank map[string]AttributeRecipe) (string, error) {
-	var desc string
+	desc := a.randomBase()
+
+	// base case
+	if pbChainPrefix < rand.Float64() {
+		return desc, nil
+	}
+
+	pfx, err := a.randomPrefix(bank)
+	if err != nil {
+		return "", err
+	}
+
+	p, err := pfx.description(bank)
+	if err != nil {
+		return "", err
+	}
+
+	desc = p + " " + desc
+	return desc, nil
+}
+
+// randomBase returns a random base attribute based on the constant rarity probabilities.
+func (a AttributeRecipe) randomBase() string {
 	pb := rand.Float64()
 
 	switch {
 	case pb < pbCommon:
-		desc = randString(a.Common)
+		return randString(a.Common)
 	case pb < pbUncommon+pbCommon:
-		desc = randString(a.Uncommon)
+		return randString(a.Uncommon)
 	case pb < pbRare+pbUncommon+pbCommon:
-		desc = randString(a.Rare)
+		return randString(a.Rare)
+	default:
+		return "you should never see this"
+	}
+}
+
+// randomPrefix returns a random prefix so long as it can be found in the provided AttributeRecipe bank.
+func (a AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (AttributeRecipe, error) {
+	if len(a.PrefixNames) <= 0 {
+		return AttributeRecipe{}, nil
 	}
 
-	if len(a.PrefixNames) > 0 && rand.Float64() > pbChainPrefix {
-		n := randString(a.PrefixNames)
-		pfx, ok := bank[n]
-		if !ok {
-			return "", fmt.Errorf("cannot find prefix AttributeRecipe '%s'", n)
-		}
-
-		p, err := pfx.description(bank)
-		if err != nil {
-			return "", err
-		}
-
-		desc = p + " " + desc
+	n := randString(a.PrefixNames)
+	pfx, ok := bank[n]
+	if !ok {
+		return AttributeRecipe{}, fmt.Errorf("cannot find prefix AttributeRecipe '%s'", n)
 	}
 
-	return desc, nil
+	return pfx, nil
 }
 
 // attribute returns an Attribute according to the AttributeRecipe.
