@@ -29,7 +29,7 @@ func (pr *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[st
 	return Property{
 		Name:      pr.Name,
 		Attribute: atb,
-		Verb:      verbs[v].RandVariant(),
+		Verb:      verbs[v].RandSynonym(),
 		Countable: pr.Countable,
 	}, nil
 }

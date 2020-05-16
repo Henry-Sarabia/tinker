@@ -13,8 +13,8 @@ type Verb struct {
 	Synonyms []string `json:"variants"`
 }
 
-// RandVariant returns a random variant from the Verb's Variants slice.
-func (v Verb) RandVariant() string {
+// RandSynonym returns a random variant from the Verb's Variants slice.
+func (v Verb) RandSynonym() string {
 	return randString(v.Synonyms)
 }
 
