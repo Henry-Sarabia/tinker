@@ -31,15 +31,15 @@ type AttributeRecipe struct {
 }
 
 // description returns a written description of an AttributeRecipe.
-func (a AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string, error) {
-	desc := []string{a.randomBase()}
+func (ar AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string, error) {
+	desc := []string{ar.randomBase()}
 
 	// base case
 	if pbChainPrefix < rand.Float64() {
 		return desc, nil
 	}
 
-	pfx, err := a.randomPrefix(bank)
+	pfx, err := ar.randomPrefix(bank)
 	if err != nil {
 		return nil, err
 	}
@@ -54,28 +54,28 @@ func (a AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string,
 }
 
 // randomBase returns a random base attribute based on the constant rarity probabilities.
-func (a AttributeRecipe) randomBase() string {
+func (ar AttributeRecipe) randomBase() string {
 	pb := rand.Float64()
 
 	switch {
 	case pb < pbCommon:
-		return randString(a.Common)
+		return randString(ar.Common)
 	case pb < pbUncommon+pbCommon:
-		return randString(a.Uncommon)
+		return randString(ar.Uncommon)
 	case pb < pbRare+pbUncommon+pbCommon:
-		return randString(a.Rare)
+		return randString(ar.Rare)
 	default:
 		return "you should never see this"
 	}
 }
 
 // randomPrefix returns a random prefix so long as it can be found in the provided AttributeRecipe bank.
-func (a AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (AttributeRecipe, error) {
-	if len(a.PrefixNames) <= 0 {
+func (ar AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (AttributeRecipe, error) {
+	if len(ar.PrefixNames) <= 0 {
 		return AttributeRecipe{}, nil
 	}
 
-	n := randString(a.PrefixNames)
+	n := randString(ar.PrefixNames)
 	pfx, ok := bank[n]
 	if !ok {
 		return AttributeRecipe{}, fmt.Errorf("cannot find prefix AttributeRecipe '%s'", n)
@@ -85,8 +85,8 @@ func (a AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (Attribut
 }
 
 // attribute returns an Attribute according to the AttributeRecipe.
-func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, error) {
-	d, err := a.description(bank)
+func (ar AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, error) {
+	d, err := ar.description(bank)
 	if err != nil {
 		return Attribute{}, err
 	}

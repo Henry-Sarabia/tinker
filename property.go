@@ -18,18 +18,18 @@ type PropertyRecipe struct {
 }
 
 // property creates a Property according the the PropertyRecipe.
-func (p *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) (Property, error) {
-	n := randString(p.AttributeNames)
+func (pr *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) (Property, error) {
+	n := randString(pr.AttributeNames)
 	atb, err := atbs[n].attribute(atbs)
 	if err != nil {
 		return Property{}, nil
 	}
 
-	v := randString(p.VerbNames)
+	v := randString(pr.VerbNames)
 	return Property{
-		Name:      p.Name,
+		Name:      pr.Name,
 		Attribute: atb,
 		Verb:      verbs[v].RandVariant(),
-		Countable: p.Countable,
+		Countable: pr.Countable,
 	}, nil
 }
