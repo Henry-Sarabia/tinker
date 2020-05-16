@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"strings"
 
 	"github.com/pkg/errors"
 )
@@ -29,8 +30,8 @@ type AttributeRecipe struct {
 }
 
 // description returns a written description of an AttributeRecipe.
-func (a AttributeRecipe) description(bank map[string]AttributeRecipe) (string, error) {
-	desc := a.randomBase()
+func (a AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string, error) {
+	desc := []string{a.randomBase()}
 
 	// base case
 	if pbChainPrefix < rand.Float64() {
@@ -39,15 +40,15 @@ func (a AttributeRecipe) description(bank map[string]AttributeRecipe) (string, e
 
 	pfx, err := a.randomPrefix(bank)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	p, err := pfx.description(bank)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	desc = p + " " + desc
+	desc = append(p, desc...)
 	return desc, nil
 }
 
@@ -90,8 +91,8 @@ func (a AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, 
 	}
 
 	return Attribute{
-		Name:        a.Name,
-		Description: d,
+		Name:        d[len(d)-1],
+		Description: strings.Join(d, " "),
 	}, nil
 }
 
