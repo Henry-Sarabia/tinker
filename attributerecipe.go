@@ -30,16 +30,35 @@ type AttributeRecipe struct {
 	PrefixNames []string `json:"prefix_names"`
 }
 
-// description returns a written description of an AttributeRecipe.
+// attribute returns an Attribute according to the AttributeRecipe receiver.
+func (ar AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, error) {
+	d, err := ar.description(bank)
+	if err != nil {
+		return Attribute{}, err
+	}
+
+	return Attribute{
+		Name:        d[len(d)-1],
+		Description: strings.TrimSpace(strings.Join(d, " ")),
+		Article:     article.Indefinite(d[0]),
+	}, nil
+}
+
+// description returns a description according to the AttributeRecipe receiver.
+// A bank of AttributeRecipies which contain the receiver's prefix
+// AttributeRecipies is required.
 func (ar AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string, error) {
-	desc := []string{ar.randomBase()}
+	desc := []string{ar.randSynonym()}
 
 	// base case
+
 	if pbChainPrefix < rand.Float64() {
 		return desc, nil
 	}
 
-	pfx, err := ar.randomPrefix(bank)
+	// recursive case
+
+	pfx, err := ar.randPrefix(bank)
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +72,9 @@ func (ar AttributeRecipe) description(bank map[string]AttributeRecipe) ([]string
 	return desc, nil
 }
 
-// randomBase returns a random base attribute based on the constant rarity probabilities.
-func (ar AttributeRecipe) randomBase() string {
+// randSynonym returns a random synonym for the AttributeRecipe receiver based
+// on the global constant attribute rarity probabilities.
+func (ar AttributeRecipe) randSynonym() string {
 	pb := rand.Float64()
 
 	switch {
@@ -69,8 +89,8 @@ func (ar AttributeRecipe) randomBase() string {
 	}
 }
 
-// randomPrefix returns a random prefix so long as it can be found in the provided AttributeRecipe bank.
-func (ar AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (AttributeRecipe, error) {
+// randPrefix returns a random prefix for the AttributeRecipe receiver.
+func (ar AttributeRecipe) randPrefix(bank map[string]AttributeRecipe) (AttributeRecipe, error) {
 	if len(ar.PrefixNames) <= 0 {
 		return AttributeRecipe{}, nil
 	}
@@ -82,20 +102,6 @@ func (ar AttributeRecipe) randomPrefix(bank map[string]AttributeRecipe) (Attribu
 	}
 
 	return pfx, nil
-}
-
-// attribute returns an Attribute according to the AttributeRecipe.
-func (ar AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute, error) {
-	d, err := ar.description(bank)
-	if err != nil {
-		return Attribute{}, err
-	}
-
-	return Attribute{
-		Name:        d[len(d)-1],
-		Description: strings.TrimSpace(strings.Join(d, " ")),
-		Article:     article.Indefinite(d[0]),
-	}, nil
 }
 
 func loadAttributeRecipes(filenames ...string) (map[string]AttributeRecipe, error) {

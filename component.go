@@ -10,7 +10,7 @@ type Component struct {
 	Properties []Property
 }
 
-// RandProperty returns a randomly selected RandProperty from the Component's Properties.
+// RandProperty returns a randomly selected Property from the Component's Properties.
 func (c Component) RandProperty() Property {
 	i := rand.Intn(len(c.Properties))
 	return c.Properties[i]

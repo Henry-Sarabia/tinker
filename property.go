@@ -17,7 +17,7 @@ type PropertyRecipe struct {
 	Countable      bool     `json:"countable"`
 }
 
-// property creates a Property according the the PropertyRecipe.
+// property creates a Property according to the PropertyRecipe receiver.
 func (pr *PropertyRecipe) property(atbs map[string]AttributeRecipe, verbs map[string]Verb) (Property, error) {
 	n := randString(pr.AttributeNames)
 	atb, err := atbs[n].attribute(atbs)
