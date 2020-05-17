@@ -4,11 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"strings"
 
-	"github.com/Henry-Sarabia/article"
 	"github.com/pkg/errors"
 )
 
@@ -37,12 +35,10 @@ func (ar AttributeRecipe) attribute(bank map[string]AttributeRecipe) (Attribute,
 	if err != nil {
 		return Attribute{}, err
 	}
-	log.Println("word: ", d[0])
 
 	return Attribute{
 		Name:        d[len(d)-1],
 		Description: strings.TrimSpace(strings.Join(d, " ")),
-		Article:     article.Indefinite(d[0]),
 	}, nil
 }
 

@@ -1,6 +1,6 @@
 package tinker
 
-const itemTemplate string = `You find {{.Prelude.Article}} {{.Prelude.Name}} {{.Name}}.
+const itemTemplate string = `You find {{getArticle .Prelude.Name}} {{.Prelude.Name}} {{.Name}}.
 {{- range .Components -}}
 {{template "component" .}}
 {{- end -}}
@@ -12,7 +12,7 @@ The {{.Name}} is {{template "property" (index .Properties 0)}}
 
 {{define "property"}}
 {{- if .Countable -}}
-{{- .Verb}} {{.Attribute.Article}} {{.Attribute.Description -}}
+{{- .Verb}} {{getArticle .Attribute.Description}} {{.Attribute.Description -}}
 {{- else}}
 {{- .Verb}} {{.Attribute.Description -}}
 {{- end}}

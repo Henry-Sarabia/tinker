@@ -4,5 +4,4 @@ package tinker
 type Attribute struct {
 	Name        string
 	Description string
-	Article     string
 }

@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"math/rand"
 	"strings"
+
+	"github.com/Henry-Sarabia/article"
 )
 
 // Generator generates items using the provided recipes.
@@ -70,7 +72,11 @@ func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 	if err != nil {
 		return Item{}, err
 	}
-	t, err := template.New("item").Parse(itemTemplate)
+	t, err := template.New("item").Funcs(template.FuncMap{
+		"getArticle": func(s string) string {
+			return article.Indefinite(s)
+		},
+	}).Parse(itemTemplate)
 
 	it := Item{
 		Name:       randString(rcp.Synonyms),
