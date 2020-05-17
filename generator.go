@@ -73,7 +73,7 @@ func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 	t, err := template.New("item").Parse(itemTemplate)
 
 	it := Item{
-		Name:       rcp.Name,
+		Name:       randString(rcp.Synonyms),
 		Prelude:    comps[0].RandProperty().Attribute,
 		Components: comps,
 	}

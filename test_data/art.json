@@ -1,6 +1,13 @@
 [
     {
         "name": "figurine",
+        "synonyms": [
+            "figurine",
+            "figure",
+            "statuette",
+            "effigy",
+            "idol"
+        ],
         "components": [
             {
                 "name": "figurine",

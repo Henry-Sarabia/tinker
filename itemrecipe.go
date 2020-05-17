@@ -11,6 +11,7 @@ import (
 // ItemRecipe defines how to generate a specific type of item.
 type ItemRecipe struct {
 	Name       string            `json:"name"`
+	Synonyms   []string          `json:"synonyms"`
 	Components []ComponentRecipe `json:"components"`
 }
 

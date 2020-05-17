@@ -1,6 +1,25 @@
 [
     {
         "name": "sword",
+        "synonyms": [
+            "sword",
+            "gladius",
+            "claymore",
+            "cutlass",
+            "rapier",
+            "sabre",
+            "longsword",
+            "long sword",
+            "zweihander",
+            "epee",
+            "foil",
+            "scimitar",
+            "katana",
+            "greatsword",
+            "great sword",
+            "shortsword",
+            "short sword"
+        ],
         "components": [
             {
                 "name": "blade",
@@ -68,6 +87,22 @@
     },
     {
         "name": "axe",
+        "synonyms": [
+            "axe",
+            "hatchet",
+            "splitting axe",
+            "tomahawk",
+            "doubleaxe",
+            "double axe",
+            "doublebit axe",
+            "broad axe",
+            "felling axe",
+            "survival axe",
+            "battleaxe",
+            "battle axe",
+            "throwing axe",
+            "pollaxe"
+        ],
         "components": [
             {
                 "name": "head",
