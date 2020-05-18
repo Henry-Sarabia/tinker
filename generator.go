@@ -117,7 +117,7 @@ func (g *Generator) component(rcp ComponentRecipe) (Component, error) {
 	}
 
 	return Component{
-		Name:       rcp.Name,
+		Name:       randString(rcp.Synonyms),
 		Properties: props,
 	}, nil
 }

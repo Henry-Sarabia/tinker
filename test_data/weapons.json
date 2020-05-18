@@ -10,6 +10,10 @@
         "components": [
             {
                 "name": "blade",
+                "synonyms": [
+                    "blade",
+                    "edge"
+                ],
                 "frequency": 1.0,
                 "properties": [
                     {
@@ -40,6 +44,14 @@
             },
             {
                 "name": "pommel",
+                "synonyms":[
+                    "pommel",
+                    "handle",
+                    "grip",
+                    "guard",
+                    "hilt",
+                    "crossguard"
+                ],
                 "frequency": 1.0,
                 "properties": [
                     {
@@ -83,6 +95,12 @@
         "components": [
             {
                 "name": "head",
+                "synonyms": [
+                    "head",
+                    "axe head",
+                    "bit",
+                    "blade"
+                ],
                 "frequency": 1.0,
                 "properties": [
                     {
@@ -112,6 +130,12 @@
             },
             {
                 "name": "handle",
+                "synonyms":[
+                    "handle",
+                    "haft",
+                    "grip",
+                    "base"
+                ],
                 "frequency": 1.0,
                 "properties": [
                     {

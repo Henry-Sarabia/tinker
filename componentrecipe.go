@@ -5,6 +5,7 @@ import "math/rand"
 // ComponentRecipe defines how to generate a piece of an Item.
 type ComponentRecipe struct {
 	Name       string           `json:"name"`
+	Synonyms   []string         `json:"synonyms"`
 	Frequency  float64          `json:"frequency"`
 	Properties []PropertyRecipe `json:"properties"`
 }
