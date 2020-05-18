@@ -78,8 +78,13 @@ func (g *Generator) item(rcp ItemRecipe) (Item, error) {
 		},
 	}).Parse(itemTemplate)
 
+	name := rcp.Name
+	if len(rcp.Synonyms) > 0 {
+		name = randString(rcp.Synonyms)
+	}
+
 	it := Item{
-		Name:       randString(rcp.Synonyms),
+		Name:       name,
 		Prelude:    comps[0].RandProperty().Attribute,
 		Components: comps,
 	}
@@ -116,8 +121,13 @@ func (g *Generator) component(rcp ComponentRecipe) (Component, error) {
 		props = append(props, prop)
 	}
 
+	name := rcp.Name
+	if len(rcp.Synonyms) > 0 {
+		name = randString(rcp.Synonyms)
+	}
+
 	return Component{
-		Name:       randString(rcp.Synonyms),
+		Name:       name,
 		Properties: props,
 	}, nil
 }
