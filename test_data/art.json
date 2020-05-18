@@ -11,6 +11,13 @@
         "components": [
             {
                 "name": "figurine",
+                "synonyms":[
+                    "figurine",
+                    "figure",
+                    "statuette",
+                    "effigy",
+                    "idol"
+                ],
                 "frequency": 1.0,
                 "properties": [
                     {
