@@ -17,34 +17,32 @@
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": "material",
                         "frequency": 1.0,
                         "countable": false,
+                        "verb_names": [
+                            "made of"
+                        ],
                         "attribute_names": [
                             "wood",
                             "base metal",
                             "precious metal"
-                        ],
-                        "verb_names": [
-                            "made of"
                         ]
                     },
                     {
-                        "name": "decoration",
                         "frequency": 0.2,
                         "countable": true,
-                        "attribute_names": [
-                            "engraving"
-                        ],
                         "verb_names": [
                             "decorated with"
+                        ],
+                        "attribute_names": [
+                            "engraving"
                         ]
                     }
                 ]
             },
             {
                 "name": "pommel",
-                "synonyms":[
+                "synonyms": [
                     "pommel",
                     "handle",
                     "grip",
@@ -55,29 +53,27 @@
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": "material",
                         "frequency": 1.0,
                         "countable": false,
+                        "verb_names": [
+                            "made of"
+                        ],
                         "attribute_names": [
                             "wood",
                             "bone",
                             "base metal",
                             "precious metal"
-                        ],
-                        "verb_names": [
-                            "made of"
                         ]
                     },
                     {
-                        "name": "decoration",
                         "frequency": 0.5,
                         "countable": true,
+                        "verb_names": [
+                            "decorated with"
+                        ],
                         "attribute_names": [
                             "gem",
                             "engraving"
-                        ],
-                        "verb_names": [
-                            "decorated with"
                         ]
                     }
                 ]
@@ -104,33 +100,31 @@
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": "material",
                         "frequency": 1.0,
                         "countable": false,
+                        "verb_names": [
+                            "made of"
+                        ],
                         "attribute_names": [
                             "wood",
                             "base metal"
-                        ],
-                        "verb_names": [
-                            "made of"
                         ]
                     },
                     {
-                        "name": "decoration",
                         "frequency": 0.1,
                         "countable": true,
-                        "attribute_names": [
-                            "engraving"
-                        ],
                         "verb_names": [
                             "decorated with"
+                        ],
+                        "attribute_names": [
+                            "engraving"
                         ]
                     }
                 ]
             },
             {
                 "name": "handle",
-                "synonyms":[
+                "synonyms": [
                     "handle",
                     "haft",
                     "grip",
@@ -139,27 +133,25 @@
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": "material",
                         "frequency": 1.0,
                         "countable": false,
+                        "verb_names": [
+                            "made of"
+                        ],
                         "attribute_names": [
                             "wood",
                             "bone",
                             "base metal"
-                        ],
-                        "verb_names": [
-                            "made of"
                         ]
                     },
                     {
-                        "name": "decoration",
                         "frequency": 0.5,
                         "countable": true,
-                        "attribute_names": [
-                            "engraving"
-                        ],
                         "verb_names": [
                             "decorated with"
+                        ],
+                        "attribute_names": [
+                            "engraving"
                         ]
                     }
                 ]
