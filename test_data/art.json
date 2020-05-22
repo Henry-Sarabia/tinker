@@ -11,7 +11,7 @@
         "components": [
             {
                 "name": "figurine",
-                "synonyms":[
+                "synonyms": [
                     "figurine",
                     "figure",
                     "statuette",
@@ -21,30 +21,28 @@
                 "frequency": 1.0,
                 "properties": [
                     {
-                        "name": "shape",
                         "frequency": 1.0,
                         "countable": true,
+                        "verb_names": [
+                            "shaped like"
+                        ],
                         "attribute_names": [
                             "humanoid",
                             "monstrosity"
-                        ],
-                        "verb_names": [
-                            "shaped like"
                         ]
                     },
                     {
-                        "name": "material",
                         "frequency": 1.0,
                         "countable": false,
+                        "verb_names": [
+                            "made of"
+                        ],
                         "attribute_names": [
                             "base metal",
                             "precious metal",
                             "wood",
                             "bone",
                             "gem"
-                        ],
-                        "verb_names":[
-                            "made of"
                         ]
                     }
                 ]
